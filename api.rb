@@ -30,15 +30,15 @@ def convert_to_json(sensor_data)
     converted_data.to_json
 end
 
-get '/v1/stations' do
+get '/api/v1/stations' do
   Sensor.all.map { |e| {sensor_id: e.sensor_id} }.to_json
 end
 
-get '/v1/sensordata' do
-  convert_to_json SensorData.all
+get '/api/v1/sensordata/:year' do
+  convert_to_json SensorData.where(:date.gte => Date.new(params[:year].to_i, 1, 1)).where(:date.lte => Date.new(params[:year].to_i, 12, 31))
 end
 
-get '/v1/sensordata/current' do
+get '/api/v1/sensordata/current' do
   max_date = SensorData.max(:date)
   convert_to_json SensorData.where(date: max_date)
 end
