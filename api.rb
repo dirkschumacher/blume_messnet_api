@@ -7,7 +7,7 @@ configure do
 end
 
 def convert_to_json(sensor_data) 
-    converted_data = sensor_data.map do |e|
+    converted_data = sensor_data.asc(:date).map do |e|
         {
             sensor_id: e.sensor.nil? ? :null : e.sensor.sensor_id,
             date: e.date,
