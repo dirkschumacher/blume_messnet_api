@@ -38,7 +38,7 @@ get '/api/v1/sensordata/:year' do
   convert_to_json SensorData.where(:date.gte => Date.new(params[:year].to_i, 1, 1)).where(:date.lte => Date.new(params[:year].to_i, 12, 31))
 end
 
-get '/api/v1/sensordata/current' do
+get '/api/v1/recent' do
   max_date = SensorData.max(:date)
   convert_to_json SensorData.where(date: max_date)
 end
