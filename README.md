@@ -3,7 +3,7 @@ blume_api
 
 An API for the [BLUME data of Berlin](http://www.stadtentwicklung.berlin.de/umwelt/luftqualitaet/de/messnetz/).
 
-Current (unstable) version of the api is deployed at:
+Current version of the api is deployed at:
 [blumeapi.herokuapp.com](http://blumeapi.herokuapp.com/)
 
 * List of sensor stations ([`/api/v1/stations`](http://blumeapi.herokuapp.com/api/v1/stations))
