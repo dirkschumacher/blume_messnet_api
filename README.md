@@ -8,4 +8,6 @@ Current (unstable) version of the api is deployed at:
 
 * List of sensor stations (`/api/v1/stations`)
 * Sensor data by year (`/api/v1/sensordata/:year`)
+    * `/api/v1/sensordata/:year/csv` gets the data as csv
 * Most recent sensor data (`/api/v1/recent`)
+    * `/api/v1/recent/csv` gets the data as csv
