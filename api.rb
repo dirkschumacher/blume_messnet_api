@@ -56,10 +56,12 @@ def get_for_year(year)
 end
 
 get '/api/v1/stations' do
+  content_type :json
   Sensor.all.map { |e| {sensor_id: e.sensor_id} }.to_json
 end
 
 get '/api/v1/sensordata/:year' do
+  content_type :json
   convert_to_json get_for_year(params[:year].to_i)
 end
 
@@ -68,6 +70,7 @@ get '/api/v1/sensordata/:year/csv' do
 end
 
 get '/api/v1/recent' do
+  content_type :json
   convert_to_json get_recent
 end
 
