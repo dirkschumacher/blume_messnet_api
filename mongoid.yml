@@ -7,6 +7,6 @@ development:
 production:
   sessions:
     default:
-      uri: <%= ENV['MONGOLAB_URI'] %>
+      uri: <%= ENV['MONGODB_URI'] %>
       options:
         retry_interval: 0
