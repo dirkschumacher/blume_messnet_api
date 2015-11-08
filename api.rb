@@ -51,10 +51,6 @@ def get_recent
   SensorData.where(date: max_date)
 end
 
-def get_for_year(year)
-  SensorData.where(:date.gte => Date.new(year, 1, 1)).where(:date.lte => Date.new(year, 12, 31))
-end
-
 get '/api/v1/stations' do
   content_type :json
   Sensor.all.map { |e| {sensor_id: e.sensor_id} }.to_json
@@ -62,11 +58,11 @@ end
 
 get '/api/v1/sensordata/:year' do
   content_type :json
-  convert_to_json get_for_year(params[:year].to_i)
+  convert_to_json SensorData.for_year(params[:year].to_i)
 end
 
 get '/api/v1/sensordata/:year/csv' do
-  convert_to_csv get_for_year(params[:year].to_i)
+  convert_to_csv SensorData.for_year(params[:year].to_i)
 end
 
 get '/api/v1/recent' do
