@@ -1,6 +1,6 @@
 require 'mongoid'
 require_relative 'sensor.rb'
-class SensorData 
+class SensorData
     include Mongoid::Document
     belongs_to :sensor
     field :date, type: Date

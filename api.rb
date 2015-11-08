@@ -7,7 +7,7 @@ configure do
   Mongoid.load!('./mongoid.yml')
 end
 
-def prepare_for_export(sensor_data) 
+def prepare_for_export(sensor_data)
     converted_data = sensor_data.asc(:date).map do |e|
         {
             sensor_id: e.sensor.nil? ? :null : e.sensor.sensor_id,
@@ -27,15 +27,15 @@ def prepare_for_export(sensor_data)
             schwefeldioxidMittel: e.schwefeldioxidMittel,
             schwefeldioxidMax1h: e.schwefeldioxidMax1h
         }
-    end 
+    end
     converted_data
 end
 
-def convert_to_json(sensor_data) 
+def convert_to_json(sensor_data)
     prepare_for_export(sensor_data).to_json
 end
 
-def convert_to_csv(sensor_data) 
+def convert_to_csv(sensor_data)
     data = prepare_for_export sensor_data
     csv_string = CSV.generate do |csv|
         csv << data.first.keys
@@ -52,7 +52,7 @@ def get_recent
 end
 
 def get_for_year(year)
-    SensorData.where(:date.gte => Date.new(year, 1, 1)).where(:date.lte => Date.new(year, 12, 31))
+  SensorData.where(:date.gte => Date.new(year, 1, 1)).where(:date.lte => Date.new(year, 12, 31))
 end
 
 get '/api/v1/stations' do
