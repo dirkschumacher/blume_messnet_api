@@ -24,4 +24,9 @@ class SensorData
         where(:date.gte => Date.new(year, 1, 1)).where(:date.lte => Date.new(year, 12, 31))
     end
 
+    def self.recent
+        max_date = SensorData.max(:date)
+        SensorData.where(date: max_date)
+    end
+
 end

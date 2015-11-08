@@ -46,11 +46,6 @@ def convert_to_csv(sensor_data)
     csv_string
 end
 
-def get_recent
-  max_date = SensorData.max(:date)
-  SensorData.where(date: max_date)
-end
-
 get '/api/v1/stations' do
   content_type :json
   Sensor.all.map { |e| {sensor_id: e.sensor_id} }.to_json
@@ -67,10 +62,10 @@ end
 
 get '/api/v1/recent' do
   content_type :json
-  convert_to_json get_recent
+  convert_to_json SensorData.recent
 end
 
 get '/api/v1/recent/csv' do
-  convert_to_csv get_recent
+  convert_to_csv SensorData.recent
 end
 
