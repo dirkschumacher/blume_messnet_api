@@ -51,9 +51,38 @@ def convert_to_csv(sensor_data)
     csv_string
 end
 
+def sensor_data_for_station(station)
+  sensor = Sensor.for_sensor(station)
+  sensor.sensor_data
+end
+
+def sensor_data_for_station_by_year(station, year)
+  sensor_data_for_station(station).for_year(year)
+end
+
 get '/api/v1/stations' do
   content_type :json
   Sensor.all.map { |e| {sensor_id: e.sensor_id} }.to_json
+end
+
+get '/api/v1/stations/:station' do
+  content_type :json
+  convert_to_json sensor_data_for_station(params[:station])
+end
+
+get '/api/v1/stations/:station/csv' do
+  content_type :csv
+  convert_to_csv sensor_data_for_station(params[:station])
+end
+
+get '/api/v1/stations/:station/sensordata/:year' do
+  content_type :json
+  convert_to_json sensor_data_for_station_by_year(params[:station], params[:year].to_i)
+end
+
+get '/api/v1/stations/:station/sensordata/:year/csv' do
+  content_type :csv
+  convert_to_csv sensor_data_for_station_by_year(params[:station], params[:year].to_i)
 end
 
 get '/api/v1/sensordata/:year' do

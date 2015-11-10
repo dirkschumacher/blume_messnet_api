@@ -21,11 +21,24 @@ accessed via [http://localhost:4567](http://localhost:4567).
 
 Here is a list of API paths which can also be found in *api.rb*:
 
-* List of sensor stations: `/api/v1/stations`
-* Sensor data by year: `/api/v1/sensordata/:year`
-    * `/api/v1/sensordata/:year/csv` serves the data as csv
-* Most recent sensor data: `/api/v1/recent`
-    * `/api/v1/recent/csv` serves the data as csv
+### List of sensor stations
+* As JSON: `/api/v1/stations`
+
+### Sensor data for a specific station
+* As JSON: `/api/v1/stations/:station_id`
+* As CSV: `/api/v1/stations/:station_id/csv`
+
+### Sensor data for a specific station by year
+* As JSON: `/api/v1/stations/:station_id/sensordata/:year`
+* As CSV: `/api/v1/stations/:station_id/sensordata/:year/csv`
+
+### Sensor data by year
+* As JSON: `/api/v1/sensordata/:year`
+* As CSV: `/api/v1/sensordata/:year/csv`
+
+### Most recent sensor data
+* As JSON: `/api/v1/recent`
+* As CSV: `/api/v1/recent/csv`
 
 
 ## See also
