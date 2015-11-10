@@ -7,6 +7,8 @@ configure do
   Mongoid.load!('./mongoid.yml')
 end
 
+NO_DATA_RESPONSE = "No data available."
+
 def prepare_for_export(sensor_data)
     converted_data = sensor_data.asc(:date).map do |e|
         {
@@ -32,11 +34,14 @@ def prepare_for_export(sensor_data)
 end
 
 def convert_to_json(sensor_data)
-    prepare_for_export(sensor_data).to_json
+    data = prepare_for_export(sensor_data)
+    data = NO_DATA_RESPONSE if data.nil? || data.empty?
+    data.to_json
 end
 
 def convert_to_csv(sensor_data)
     data = prepare_for_export sensor_data
+    return NO_DATA_RESPONSE if data.nil? || data.empty?
     csv_string = CSV.generate do |csv|
         csv << data.first.keys
         data.each do |hash|
