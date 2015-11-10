@@ -2,7 +2,7 @@
 
 An API for the [BLUME data of Berlin][blume].
 
-The current version of the API is not deloyed.
+The current version of the API is not deloyed and is just for research purposes.
 
 
 ## Usage
