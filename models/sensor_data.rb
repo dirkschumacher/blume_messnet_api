@@ -19,4 +19,14 @@ class SensorData
     field :schwefeldioxidMittel, type: Float
     field :schwefeldioxidMax1h, type: Float
     index({ date: 1, sensor_id: 1 }, { unique: true })
+
+    def self.for_year year
+        where(:date.gte => Date.new(year, 1, 1)).where(:date.lte => Date.new(year, 12, 31))
+    end
+
+    def self.recent
+        max_date = SensorData.max(:date)
+        SensorData.where(date: max_date)
+    end
+
 end
