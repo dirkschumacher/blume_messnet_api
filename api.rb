@@ -57,6 +57,7 @@ get '/api/v1/sensordata/:year' do
 end
 
 get '/api/v1/sensordata/:year/csv' do
+  content_type :csv
   convert_to_csv SensorData.for_year(params[:year].to_i)
 end
 
@@ -66,6 +67,7 @@ get '/api/v1/recent' do
 end
 
 get '/api/v1/recent/csv' do
+  content_type :csv
   convert_to_csv SensorData.recent
 end
 
